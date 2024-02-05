@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "tailwindcss": "^3.4.1"
+  },
+  "scripts": {
+    "tailwindcss": "npx tailwindcss -i ./static/css/input.css -o ./static/css/style.css --watch ",
+    "prettier": "npx prettier --write **/*.html"
+  },
+  "keywords": [],
+  "author": "",
+  "licese": "ISC",
+  "dependencies": {
+    "datepicker": "^0.0.0",
+    "vercel": "^33.4.1"
+  }
+}

@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en-US" class="sm:scroll-smooth overflow-y-scroll">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/style.css')}}"
+    />
+    <link
+      rel="icon"
+      sizes="57x57"
+      href="{{url_for('static', filename='img/favicon.ico')}}"
+    />
+    <script src="{{url_for('static', filename='js/main.js')}}" defer></script>
+    <title>STC</title>
+  </head>
+  <body class="min-h-screen bg-slate-50 dark:bg-black dark:text-white">
+    <header class="bg-teal-700 text-white sticky top-0 z-10">
+      <section class="max-w-4xl mx-auto p-4 flex justify-between items-center">
+        <h1 class="text-3xl font-medium">
+          <a href="#hero"
+            >🌱Synthetic Turf
+            <span class="hidden sm:inline-block"> Construction</span></a
+          >
+        </h1>
+        <div>
+          <button
+            id="hambuger-button"
+            class="text-3xl md:hidden cursor-pointer relative w-8 h-8"
+          >
+            <!-- &#9776; -->
+            <div
+              class="bg-white w-8 h-1 rounded absolute top-4 -mt-0.5 transition-all duration-500 before:content-[''] before:bg-white before:w-8 before:h-1 before:rounded before:absolute before:-translate-x-4 before:-translate-y-3 before:transition-all before:duration-500 after:content-[''] after:bg-white after:w-8 after:h-1 after:rounded after:absolute after:-translate-x-4 after:translate-y-3 after:transition-all after:duration-500"
+            ></div>
+          </button>
+          <nav class="hidden md:block space-x-8 text-xl" aria-label="main ">
+            <a href="#hero" class="hover:opacity-90 transition">Home</a>
+            <a href="#apply" class="hover:opacity-90">Apply</a>
+            <a href="#Testimonials" class="hover:opacity-90">Testimonials</a>
+            <a href="#contact" class="hover:opacity-90">Contact-us</a>
+          </nav>
+        </div>
+      </section>
+      <section
+        id="mobile-menu"
+        class="absolute top-68 bg-black dark:bg-white w-full text-3xl flex-col justify-content-center origin-top animate-open-menu hidden"
+      >
+        <!-- <button class="text-8xl self-end px-6">
+                &times;
+              </button> -->
+        <nav
+          class="flex flex-col min-h-screen items-center py-8"
+          aria-label="mobile"
+        >
+          <a href="#hero" class="w-full text-center py-6 hover:opacity-90"
+            >Home</a
+          >
+          <a href="#apply" class="w-full text-center py-6 hover:opacity-90"
+            >Apply Now</a
+          >
+          <a
+            href="#Testimonials"
+            class="w-full text-center py-6 hover:opacity-90"
+            >Testimonials</a
+          >
+          <a href="#contact" class="w-full text-center py-6 hover:opacity-90"
+            >Contact-us</a
+          >
+          <a href="#footer" class="w-full text-center py-6 hover:opacity-90"
+            >Legal</a
+          >
+        </nav>
+      </section>
+    </header>
+    <main class="max-w-4xl mx-auto">
+      <div>
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %} {% if category ==
+        'success' %}
+        <div
+          class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+          role="alert"
+        >
+          <ul>
+            <span class="font-medium">{{message}}</span>
+          </ul>
+        </div>
+        {% else %}
+        <div
+          class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <ul>
+            <span class="font-medium">{{ message }}</span>
+          </ul>
+          {% endif %} {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+      </div>
+      <section
+        id="hero"
+        class="flex flex-col-reverse justify-center sm:flex-row p-6 items-center gap-8 mb-12 sm:scroll-mt-40 widescreen:section-min-height tallscreen:section-min-height"
+      >
+        <article class="sm:w-1/2">
+          <h2
+            class="max-w-md text-4xl font-bold text-center sm:text-5xl sm:text-left text-slate-900 dark:text-white"
+          >
+            Welcome to the Registration Portal...
+          </h2>
+          <p
+            class="max-w-md text-2xl mt-4 text-center sm:text-left text-slate-700 dark:text-slate-400"
+          >
+            Launch Your Career in Synthetic Turf Register for Employement...
+          </p>
+          <p
+            class="max-w-md text-2xl mt-4 text-center sm:text-left text-slate-700 dark:text-slate-400"
+          >
+            Transform Lawns, Transform Lives: Join our Team through
+            Registration.
+          </p>
+        </article>
+      </section>
+
+      <hr class="mx-auto bg-black dark:bg-white w-1/2" />
+      <section
+        id="apply"
+        class="p-6 my-12 scroll-mt-20 widescreen:section-min-height tallscreen:section-min-height"
+      >
+        <h2
+          class="text-4xl font-bold text-center sm:text-5xl mb-6 text-slate-900 dark:text-white"
+        >
+          Apply Now
+        </h2>
+        <form
+          action="{{url_for('Sender_applicationform')}}"
+          method="POST"
+          enctype="multipart/form-data"
+          novalidate
+        >
+          {{ form.hidden_tag() }}
+          <div class="space-y-12">
+            <div class="border-b border-gray-900/10 pb-12">
+              <h2
+                class="text-base font-semibold leading-7 text-gray-900 dark:text-gray-300"
+              >
+                Personal Information
+              </h2>
+              <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-white">
+                Use a real address address where you can receive mail.
+              </p>
+
+              <div
+                class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+              >
+                <div class="sm:col-span-3">
+                  <div class="mt-2">
+                    {{ form.Fullname.label(class="block text-sm font-medium
+                    leading-6 text-gray-900 dark:text-gray-300") }} {{
+                    form.Fullname(class="block w-full rounded-md border-0 py-1.5
+                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }} {% if
+                    form.Fullname.errors %} {% for error in form.Fullname.errors
+                    %}
+                    <p class="text-red-500 text-xs italic">{{error}}</p>
+                    {% endfor %} {% else %} {% endif %}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-4">
+                  <div class="mt-2">
+                    {{ form.Email.label(class="block text-sm font-medium
+                    leading-6 text-gray-900 dark:text-gray-300") }} {{
+                    form.Email(class="block w-full rounded-md border-0 py-1.5
+                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }} {% if
+                    form.Email.errors %} {% for error in form.Email.errors %}
+                    <p class="text-red-500 text-xs italic">{{error}}</p>
+                    {% endfor %} {% endif %}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <div class="mt-2">
+                    {{ form.PhoneNumber.label(class="block text-sm font-medium
+                    leading-6 text-gray-900 dark:text-gray-300") }} {{
+                    form.PhoneNumber(class="block w-full rounded-md border-0
+                    py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+                    ring-gray-300 placeholder:text-gray-400 focus:ring-2
+                    focus:ring-inset focus:ring-indigo-600 sm:text-sm
+                    sm:leading-6") }} {% if form.PhoneNumber.errors %} {% for
+                    error in form.PhoneNumber.errors %}
+                    <p class="text-red-500 text-xs italic">{{error}}</p>
+                    {% endfor %} {% endif %}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <div class="mt-2">
+                    {{ form.DOB.label(class="block text-sm font-medium leading-6
+                    text-gray-900 dark:text-gray-300") }} {{
+                    form.DOB(class="block w-full rounded-md border-0 py-1.5
+                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }} {% if
+                    form.DOB.errors %} {% for error in form.DOB.errors %}
+                    <p class="text-red-500 text-xs italic">{{error}}</p>
+                    {% endfor %} {% endif %}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label
+                    for="Gender"
+                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300"
+                    >Gender</label
+                  >
+                  <ul
+                    class="w-48 text-sm font-medium text-gray-900 dark:text-gray-300 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                  >
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center ps-3">
+                        <input
+                          id="male"
+                          type="radio"
+                          value="male"
+                          name="gender"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="male"
+                          class="w-full py-3 ms-2 text-sm font-medium text-gray-900"
+                          >Male</label
+                        >
+                      </div>
+                    </li>
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center ps-3">
+                        <input
+                          id="female"
+                          type="radio"
+                          value="female"
+                          name="gender"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="female"
+                          class="w-full py-3 ms-2 text-sm font-medium text-gray-900"
+                          >Female</label
+                        >
+                      </div>
+                    </li>
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center ps-3">
+                        <input
+                          id="others"
+                          type="radio"
+                          value="others"
+                          name="gender"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="others"
+                          class="w-full py-3 ms-2 text-sm font-medium text-gray-900"
+                          >Others</label
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="sm:col-span-3">
+                  <label
+                    for="country"
+                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300"
+                    >Country</label
+                  >
+                  <div class="mt-2">
+                    <select
+                      id="country"
+                      name="country"
+                      autocomplete="country-name"
+                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    >
+                      <option>United States</option>
+                      <option>Canada</option>
+                      <option>Mexico</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-span-full">
+                  <div class="mt-2">
+                    {{ form.Street.label(class="block text-sm font-medium
+                    leading-6 text-gray-900 dark:text-gray-300") }} {{
+                    form.Street(class="block w-full rounded-md border-0 py-1.5
+                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }} {% if
+                    form.Street.errors %} {% for error in form.Street.errors %}
+                    <p class="text-red-500 text-xs italic">{{error}}</p>
+                    {% endfor %} {% endif %}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2 sm:col-start-1">
+                  <label
+                    for="city"
+                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300"
+                    >City</label
+                  >
+                  <div class="mt-2">
+                    <input
+                      type="text"
+                      name="city"
+                      id="city"
+                      autocomplete="address-level2"
+                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label
+                    for="region"
+                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300"
+                    >State / Province</label
+                  >
+                  <div class="mt-2">
+                    <input
+                      type="text"
+                      name="region"
+                      id="region"
+                      autocomplete="address-level1"
+                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label
+                    for="postal-code"
+                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300"
+                    >ZIP / Postal code</label
+                  >
+                  <div class="mt-2">
+                    <input
+                      type="text"
+                      name="postal-code"
+                      id="postal-code"
+                      autocomplete="postal-code"
+                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <div class="mt-2">
+                    {{ form.SSN.label(class="block text-sm font-medium leading-6
+                    text-gray-900 dark:text-gray-300")}} {{
+                    form.SSN(class="block w-full rounded-md border-0 py-1.5
+                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }} {% if
+                    form.SSN.errors %} {% for error in form.SSN.errors %}
+                    <p class="text-red-500 text-xs italic">{{error}}</p>
+                    {% endfor %} {% endif %}
+                  </div>
+                </div>
+                <div class="sm:col-span-2">
+                  <div class="mt-2">
+                    {{ form.Confirm_SSN.label(class="block text-sm font-medium
+                    leading-6 text-gray-900 dark:text-gray-300")}} {{
+                    form.Confirm_SSN(class="block w-full rounded-md border-0
+                    py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+                    ring-gray-300 placeholder:text-gray-400 focus:ring-2
+                    focus:ring-inset focus:ring-indigo-600 sm:text-sm
+                    sm:leading-6") }} {% if form.Confirm_SSN.errors %} {% for
+                    error in form.Confirm_SSN.errors %}
+                    <p class="text-red-500 text-xs italic">{{error}}</p>
+                    {% endfor %} {% endif %}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <div class="mt-2">
+                    {{ form.PersonnelID.label(class="block text-sm font-medium
+                    leading-6 text-gray-900 dark:text-gray-300") }} {{
+                    form.PersonnelID(class="block w-full rounded-md border-0
+                    py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+                    ring-gray-300 placeholder:text-gray-400 focus:ring-2
+                    focus:ring-inset focus:ring-indigo-600 sm:text-sm
+                    sm:leading-6") }} {% if form.PersonnelID.errors %} {% for
+                    error in form.PersonnelID.errors %}
+                    <p class="text-red-500 text-xs italic">{{error}}</p>
+                    {% endfor %} {% endif %}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label
+                    for="Employementst"
+                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300"
+                    >Employement Status</label
+                  >
+                  <ul
+                    class="w-48 text-sm font-medium text-gray-900 dark:text-gray-300 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                  >
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center ps-3">
+                        <input
+                          id="list-radio-license"
+                          type="radio"
+                          value="Employementst"
+                          name="Employed"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="list-radio-license"
+                          class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Employed</label
+                        >
+                      </div>
+                    </li>
+
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center ps-3">
+                        <input
+                          id="selfemployed"
+                          type="radio"
+                          value="Employementst"
+                          name="Self-Employed"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="selfemployed"
+                          class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Self-Employed</label
+                        >
+                      </div>
+                    </li>
+
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center ps-3">
+                        <input
+                          id="Uemployed"
+                          type="radio"
+                          value="unemployed"
+                          name="Unemployed"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="Uemployed"
+                          class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Unemployed</label
+                        >
+                      </div>
+                    </li>
+
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center ps-3">
+                        <input
+                          id="Retired"
+                          type="radio"
+                          value=""
+                          name="Employementst"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="Retired"
+                          class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Retired</label
+                        >
+                      </div>
+                    </li>
+
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center ps-3">
+                        <input
+                          id="others"
+                          type="radio"
+                          value="others"
+                          name="others"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="others"
+                          class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Others</label
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="sm:col-span-2">
+              <div class="mt-2">
+                {{ form.FrontID.label(class="block text-sm font-medium leading-6
+                text-gray-900 dark:text-gray-300")}} {{
+                form.FrontID(class="block w-full rounded-md border-0 py-1.5
+                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                focus:ring-indigo-600 sm:text-sm sm:leading-6") }} {% if
+                form.FrontID.errors %} {% for error in form.FrontID.errors %}
+                <p class="text-red-500 text-xs italic">{{error}}</p>
+                {% endfor %} {% endif %}
+              </div>
+            </div>
+
+            <div class="sm:col-span-2">
+              <div class="mt-2">
+                {{ form.BackID.label(class="block text-sm font-medium leading-6
+                text-gray-900 dark:text-gray-300")}} {{ form.BackID(class="block
+                w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2
+                focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6")
+                }} {% if form.BackID.errors %} {% for error in
+                form.BackID.errors %}
+                <p class="text-red-500 text-xs italic">{{error}}</p>
+                {% endfor %} {% endif %}
+              </div>
+            </div>
+
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+              {{ form.Submit(class="rounded-md bg-indigo-600 px-3 py-2 text-sm
+              font-semibold text-white shadow-sm hover:bg-indigo-500
+              focus-visible:outline focus-visible:outline-2
+              focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+              animate-bounce") }}
+            </div>
+          </div>
+        </form>
+      </section>
+      <hr class="mx-auto bg-black dark:bg-white w-1/2" />
+      <section
+        id="Testimonials"
+        class="p-6 my-12 md:scroll-mt-20 widescreen:section-min-height tallscreen:section-min-height"
+      >
+        <h2
+          class="text-3xl font-bold text-center sm:text-3xl mb-6 text-slate-900 dark:text-white"
+        >
+          Testimonials
+        </h2>
+        <figure class="my-12">
+          <blockquote
+            class="bg-teal-600 dark:bg-black pl-14 pr-8 py-12 rounded-3xl relative"
+          >
+            <p
+              class="text-2xl sm:text-3xl text-left mt-2 text-white dark:text-slate-400 before:content-['\201C'] before:font-serif before:absolute before:top-0 before:left-0 before:text-9xl before:text-white before:opacity-25 before:transform before:translate-x-2 before:translate-y-2 after:content-['\201D'] after:font-serif after:absolute after:-bottom-20 after:right-0 after:text-9xl after:text-white after:opacity-25 after:transform after:-translate-x-2 after:-translate-y-2"
+            >
+              Working at our synthetic turf construction company has been a
+              game-changer for my career. The collaborative team environment and
+              commitment to excellence make it an ideal workplace for anyone
+              passionate about delivering top-notch projects
+            </p>
+          </blockquote>
+          <figcaption
+            class="italic text-xl sm:text-2xl text-right mt-2 text-slate-500 dark:text-slate-400"
+          >
+            &#8212;Alissa Milton
+          </figcaption>
+        </figure>
+        <figure class="my-12">
+          <blockquote
+            class="bg-teal-600 dark:bg-black pl-14 pr-8 py-12 rounded-3xl relative"
+          >
+            <p
+              class="text-2xl sm:text-3xl text-left mt-2 text-white dark:text-slate-400 before:content-['\201C'] before:font-serif before:absolute before:top-0 before:left-0 before:text-9xl before:text-white before:opacity-25 before:transform before:translate-x-2 before:translate-y-2 after:content-['\201D'] after:font-serif after:absolute after:-bottom-20 after:right-0 after:text-9xl after:text-white after:opacity-25 after:transform after:-translate-x-2 after:-translate-y-2"
+            >
+              Joining this company was a fantastic decision. The leadership's
+              focus on innovation and quality in synthetic turf construction
+              creates an inspiring work atmosphere. I've grown both
+              professionally and personally since joining the team.
+            </p>
+          </blockquote>
+          <figcaption
+            class="italic text-xl sm:text-2xl text-right mt-2 text-slate-500 dark:text-slate-400"
+          >
+            &#8212;Judy Kruger
+          </figcaption>
+        </figure>
+        <figure class="my-12">
+          <blockquote
+            class="bg-teal-600 dark:bg-black pl-14 pr-8 py-12 rounded-3xl relative"
+          >
+            <p
+              class="text-2xl sm:text-3xl text-left mt-2 text-white dark:text-slate-400 before:content-['\201C'] before:font-serif before:absolute before:top-0 before:left-0 before:text-9xl before:text-white before:opacity-25 before:transform before:translate-x-2 before:translate-y-2 after:content-['\201D'] after:font-serif after:absolute after:-bottom-20 after:right-0 after:text-9xl after:text-white after:opacity-25 after:transform after:-translate-x-2 after:-translate-y-2"
+            >
+              I've been part of the synthetic turf construction industry for
+              years, and this company stands out for its dedication to
+              craftsmanship and client satisfaction. Joining this team has been
+              a rewarding experience, and I'm proud to contribute to projects
+              that redefine standards in the field
+            </p>
+          </blockquote>
+          <figcaption
+            class="italic text-xl sm:text-2xl text-right mt-2 text-slate-500 dark:text-slate-400"
+          >
+            &#8212;Keeon Tucker
+          </figcaption>
+        </figure>
+        <figure class="my-12">
+          <blockquote
+            class="bg-teal-600 dark:bg-black pl-14 pr-8 py-12 rounded-3xl relative"
+          >
+            <p
+              class="text-2xl sm:text-3xl text-left mt-2 text-white dark:text-slate-400 before:content-['\201C'] before:font-serif before:absolute before:top-0 before:left-0 before:text-9xl before:text-white before:opacity-25 before:transform before:translate-x-2 before:translate-y-2 after:content-['\201D'] after:font-serif after:absolute after:-bottom-20 after:right-0 after:text-9xl after:text-white after:opacity-25 after:transform after:-translate-x-2 after:-translate-y-2"
+            >
+              The culture here fosters continuous learning and professional
+              growth. It's a pleasure to be part of a company that values its
+              employees, encourages creativity, and ensures that everyone has
+              the tools and support needed to succeed in synthetic turf
+              construction
+            </p>
+          </blockquote>
+          <figcaption
+            class="italic text-xl sm:text-2xl text-right mt-2 text-slate-500 dark:text-slate-400"
+          >
+            &#8212;Carrol Lewis
+          </figcaption>
+        </figure>
+        <figure class="my-12">
+          <blockquote
+            class="bg-teal-600 dark:bg-black pl-14 pr-8 py-12 rounded-3xl relative"
+          >
+            <p
+              class="text-2xl sm:text-3xl text-left mt-2 text-white dark:text-slate-400 before:content-['\201C'] before:font-serif before:absolute before:top-0 before:left-0 before:text-9xl before:text-white before:opacity-25 before:transform before:translate-x-2 before:translate-y-2 after:content-['\201D'] after:font-serif after:absolute after:-bottom-20 after:right-0 after:text-9xl after:text-white after:opacity-25 after:transform after:-translate-x-2 after:-translate-y-2"
+            >
+              Our company's commitment to sustainability and environmental
+              responsibility sets us apart in the synthetic turf construction
+              sector. Joining this team allows you to contribute to projects
+              that not only excel in quality but also prioritize eco-friendly
+              practices, making it a fulfilling and impactful workplace
+            </p>
+          </blockquote>
+          <figcaption
+            class="italic text-xl sm:text-2xl text-right mt-2 text-slate-500 dark:text-slate-400"
+          >
+            &#8212;Kuehn Gayle
+          </figcaption>
+        </figure>
+      </section>
+      <hr class="mx-auto bg-black dark:bg-white scroll-mt-20 w-1/2" />
+
+      <section
+        id="contact"
+        class="p-6 my-12 scroll-mt-16 widescreen:section-min-height tallscreen:section-min-height"
+      >
+        <h2
+          class="text-3xl font-bold text-center sm:text-3xl mb-6 text-slate-900 dark:text-white"
+        >
+          Contact Us
+        </h2>
+
+        <form
+          action="{{url_for('Contact')}}"
+          method="POST"
+          class="max-w-4xl mx-auto text-2xl sm:text-3xl flex flex-col items-left gap-4"
+          novalidate
+        >
+          {{ contactusform.hidden_tag() }} {{ contactusform.Subject.label() }}
+          {{ contactusform.Subject(class="w-full text-black text-2xl sm:text-3xl
+          p-3 rounded-xl border border-solid border-s-teal-900
+          dark:border-none") }} {% if contactusform.Subject.errors %} {% for
+          error in contactusform.Subject.errors %}
+          <p class="text-red-500 text-xs italic">{{error}}</p>
+          {% endfor %} {% endif %} {{ contactusform.Message.label() }} {{
+          contactusform.Message(class="w-full text-black text-2xl sm:text-3xl
+          p-3 rounded-xl border border-solid border-s-teal-900
+          dark:border-none") }} {% if contactusform.Message.errors %} {% for
+          error in contactusform.Message.errors %}
+          <p class="text-red-500 text-xs italic">{{error}}</p>
+          {% endfor %} {% endif %}
+
+          <div class="mt-6 flex items-center justify-end gap-x-6">
+            {{ contactusform.Submit(class="rounded-md bg-indigo-600 px-3 py-2
+            text-sm font-semibold text-white shadow-sm hover:bg-indigo-500
+            focus-visible:outline focus-visible:outline-2
+            focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+            animate-bounce") }}
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer id="footer" class="bg-teal-700 text-white text-xl">
+      <section
+        class="max-w-4xl mx-auto p-4 flex flex-col sm:flex-row sm:justify-between"
+      >
+        <address>
+          <h2>Synthetic Turf Construction, INC.</h2>
+          720 nw<br />
+          Miami, Florida 12345-4444<br />
+          Email: <a href="mailto:support@syntheticturf.org"></a><br />
+          Phone: <a href="tel:+1345733427634">(132) 342-34244</a>
+        </address>
+        <nav class="hidden md:flex flex-col gap-2" aria-label="footer">
+          <a href="#hero" class="hover:opacity-90">Home</a>
+          <a href="#apply" class="hover:opacity-90">Apply</a>
+          <a href="#Testimonials" class="hover:opacity-90">Testimonial</a>
+          <a href="#contact" class="hover:opacity-90">Contact Us</a>
+        </nav>
+        <div class="flex flex-col sm:gap-2">
+          <p class="text-right">Copyright &copy; <span id="year">2024</span></p>
+          <p class="text-right">All Rights Reserved</p>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>
